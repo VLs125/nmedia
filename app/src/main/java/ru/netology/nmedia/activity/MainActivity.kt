@@ -9,11 +9,15 @@ import androidx.core.view.WindowInsetsCompat
 import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.service.WordEndingService
 import ru.netology.nmedia.storage.MainStorage
 
 class MainActivity : AppCompatActivity() {
+    val storage = MainStorage()
+    val wordsService = WordEndingService()
     override fun onCreate(savedInstanceState: Bundle?) {
-        val storage = MainStorage()
+        storage.initializeStorageForTest()
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,8 +36,8 @@ class MainActivity : AppCompatActivity() {
                     " цепочку перемен → http://netolo.gy/fyb\""
         )
         // set shares and likes count
-        binding.likeCount.text = String.format(storage.getLikeCount().toString())
-        binding.shareCount.text = String.format(storage.getShareCount().toString())
+        binding.likeCount.text = wordsService.getCountWord(storage.getLikeCount())
+        binding.shareCount.text = wordsService.getCountWord(storage.getShareCount())
 
         binding.like.setImageResource(
             if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
@@ -44,16 +48,21 @@ class MainActivity : AppCompatActivity() {
                 if (post.likedByMe) {
                     like.setImageResource(R.drawable.ic_liked_24)
                     storage.increaseLikeCount()
-                    binding.likeCount.text = String.format(storage.getLikeCount().toString())
+                    likeCount.text =
+                        wordsService.getCountWord(storage.getLikeCount())
                 } else {
                     like.setImageResource(
                         R.drawable.ic_like_24
-
                     )
                     storage.decreaseLikeCount()
-                    binding.likeCount.text = String.format(storage.getLikeCount().toString())
+                    likeCount.text =
+                        wordsService.getCountWord(storage.getLikeCount())
 
                 }
+            }
+            share.setOnClickListener {
+                storage.increaseShareCount()
+                shareCount.text = wordsService.getCountWord(storage.getShareCount())
             }
             content.text = post.content
             author.text = post.author

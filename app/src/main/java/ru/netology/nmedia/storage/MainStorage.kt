@@ -3,6 +3,11 @@ package ru.netology.nmedia.storage
 class MainStorage {
     private val storage: HashMap<String, Int> = HashMap()
 
+    fun initializeStorageForTest() {
+        storage.put(LIKE, 9999)
+        storage.put(SHARE, 1_899_999)
+    }
+
     fun increaseLikeCount() {
         val likeCount = storage[LIKE]
         if (likeCount == null) {
