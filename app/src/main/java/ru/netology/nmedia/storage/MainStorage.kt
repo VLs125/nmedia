@@ -1,13 +1,13 @@
 package ru.netology.nmedia.storage
 
-class  MainStorage {
+class MainStorage {
     private val storage: HashMap<String, Int> = HashMap()
 
     fun increaseLikeCount() {
         val likeCount = storage[LIKE]
         if (likeCount == null) {
             storage[LIKE] = 1
-        } else if (likeCount >= 1) {
+        } else if (likeCount >= 0) {
             storage[LIKE] = likeCount + 1
         }
     }

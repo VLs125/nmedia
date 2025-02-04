@@ -31,22 +31,29 @@ class MainActivity : AppCompatActivity() {
                     "бежать быстрее. Наша миссия — помочь встать на путь роста и начать" +
                     " цепочку перемен → http://netolo.gy/fyb\""
         )
-        binding.likeCount.setText(
-            storage.getLikeCount()
-        )
-        binding.shareCount.setText(
-            storage.getShareCount()
-        )
+        // set shares and likes count
+        binding.likeCount.text = String.format(storage.getLikeCount().toString())
+        binding.shareCount.text = String.format(storage.getShareCount().toString())
+
         binding.like.setImageResource(
             if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
         )
         with(binding) {
             like.setOnClickListener {
                 post.likedByMe = !post.likedByMe
-                if (post.likedByMe) like.setImageResource(R.drawable.ic_liked_24)
-                else like.setImageResource(
-                    R.drawable.ic_like_24
-                )
+                if (post.likedByMe) {
+                    like.setImageResource(R.drawable.ic_liked_24)
+                    storage.increaseLikeCount()
+                    binding.likeCount.text = String.format(storage.getLikeCount().toString())
+                } else {
+                    like.setImageResource(
+                        R.drawable.ic_like_24
+
+                    )
+                    storage.decreaseLikeCount()
+                    binding.likeCount.text = String.format(storage.getLikeCount().toString())
+
+                }
             }
             content.text = post.content
             author.text = post.author
