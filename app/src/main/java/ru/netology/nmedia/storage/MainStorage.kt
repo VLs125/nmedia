@@ -2,7 +2,7 @@ package ru.netology.nmedia.storage
 
 class MainStorage {
     private val storage: HashMap<String, Int> = HashMap()
-
+    //ТЕСТОВАЯ ИНИЦИАЛИЗАЦИЯ
     fun initializeStorageForTest() {
         storage.put(LIKE, 9999)
         storage.put(SHARE, 1_899_999)
