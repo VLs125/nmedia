@@ -6,11 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/common_spacing"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <TextView
         android:id="@+id/viewCount"
-        android:layout_width="@dimen/ic_base_size"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/ic_base_size"
         android:layout_marginTop="@dimen/common_spacing"
         android:text="500"
@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/shareCount"
-        android:layout_width="@dimen/ic_base_size"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/ic_base_size"
         android:layout_marginTop="@dimen/common_spacing"
         android:text="5"
@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="@id/barrier"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@sample/posts.json/data/authorAvatar" />
+        tools:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/author"
@@ -103,7 +103,7 @@
 
     <ImageView
         android:id="@+id/share"
-        android:layout_width="@dimen/ic_base_size"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/ic_base_size"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintLeft_toRightOf="@id/likeCount"
@@ -112,7 +112,7 @@
 
     <ImageView
         android:id="@+id/view"
-        android:layout_width="@dimen/ic_base_size"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/ic_base_size"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintRight_toLeftOf="@id/viewCount"
@@ -121,15 +121,15 @@
 
     <ImageView
         android:id="@+id/like"
-        android:layout_width="@dimen/ic_base_size"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/ic_base_size"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:srcCompat="@android:drawable/btn_star" />
+        app:srcCompat="@drawable/ic_like_24" />
 
     <TextView
         android:id="@+id/likeCount"
-        android:layout_width="@dimen/ic_base_size"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/ic_base_size"
         android:text="10"
         app:layout_constraintBottom_toBottomOf="@id/like"
