@@ -8,6 +8,5 @@ class WordEndingService {
             count > 999_999 -> (count / 1_000_000).toString() + "." + ((count % 1_000_000) / 100_000) + "M"
             else -> count.toString()
         }
-
     }
 }
