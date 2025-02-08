@@ -29,20 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         likeViewModel.data.observe(this) { it ->
             with(binding) {
-                if (postViewModel.isLiked()) {
-                    likeViewModel.decreaseLike()
-                    likeCount.text = wordsService.getCountWord(it)
-
-                } else {
-                    likeViewModel.increaseLike()
-                    likeCount.text = wordsService.getCountWord(it)
-
-                }
+                likeCount.text = wordsService.getCountWord(it)
             }
         }
         shareViewModel.data.observe(this) { it ->
             with(binding) {
-                shareViewModel.increaseShare()
                 shareCount.text = wordsService.getCountWord(it)
             }
         }
@@ -61,10 +52,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.like.setOnClickListener {
             if (postViewModel.isLiked()) {
+                postViewModel.like()
                 likeViewModel.decreaseLike()
 
-
             } else {
+                postViewModel.like()
                 likeViewModel.increaseLike()
 
             }
