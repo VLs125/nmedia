@@ -1,7 +1,9 @@
 package ru.netology.nmedia.storage
 
+@Deprecated("Перешли на liveData -> repository")
 class MainStorage {
     private val storage: HashMap<String, Int> = HashMap()
+
     //ТЕСТОВАЯ ИНИЦИАЛИЗАЦИЯ
     fun initializeStorageForTest() {
         storage.put(LIKE, 8999)
