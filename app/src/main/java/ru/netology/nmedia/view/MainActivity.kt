@@ -7,15 +7,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import ru.netology.nmedia.R
+import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.service.WordEndingService
-import ru.netology.nmedia.viewmodel.LikeViewModel
 import ru.netology.nmedia.viewmodel.PostViewModel
-import ru.netology.nmedia.viewmodel.ShareViewModel
 
 class MainActivity : AppCompatActivity() {
-    private val wordsService = WordEndingService()
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -24,46 +20,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         applyInset(binding.main)
         val postViewModel: PostViewModel by viewModels()
-        val likeViewModel: LikeViewModel by viewModels()
-        val shareViewModel: ShareViewModel by viewModels()
+        val adapter =
+            PostAdapter({ postViewModel.like(it.id) }, { postViewModel.increaseShare(it.id) })
+        binding.main.adapter = adapter
 
-        likeViewModel.data.observe(this) { it ->
-            with(binding) {
-                likeCount.text = wordsService.getCountWord(it)
-            }
-        }
-        shareViewModel.data.observe(this) { it ->
-            with(binding) {
-                shareCount.text = wordsService.getCountWord(it)
-            }
-        }
+        postViewModel.data.observe(this) { posts ->
+            adapter.posts = posts
 
-        postViewModel.data.observe(this) { post ->
-            with(binding) {
-                author.text = post.author
-                published.text = post.publshed
-                content.text = post.content
-                like.setImageResource(
-                    if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
-                )
-
-            }
-        }
-
-        binding.like.setOnClickListener {
-            if (postViewModel.isLiked()) {
-                postViewModel.like()
-                likeViewModel.decreaseLike()
-
-            } else {
-                postViewModel.like()
-                likeViewModel.increaseLike()
-
-            }
-        }
-
-        binding.share.setOnClickListener {
-            shareViewModel.increaseShare()
         }
     }
 
@@ -79,4 +42,5 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
+
 }
