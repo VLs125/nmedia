@@ -31,13 +31,16 @@ class PostRepositoryImpl : PostRepository {
         posts = posts.map { post ->
             if (post.id == id) {
                 post.copy(
-                    likedByMe = !post.likedByMe,
+
                     likes = if (post.likedByMe) {
-                        post.likes - 1
+                        post.likes--
                     } else {
-                        post.likes + 1
-                    }
-                )
+                        post.likes++
+                    },
+                    likedByMe = !post.likedByMe,
+
+                    )
+
             } else {
                 post
             }
@@ -74,7 +77,7 @@ class PostRepositoryImpl : PostRepository {
         posts = posts.map { post ->
             if (post.id == id) {
                 post.copy(
-                    shares = post.shares + 1
+                    shares = post.shares++
                 )
             } else {
                 post
