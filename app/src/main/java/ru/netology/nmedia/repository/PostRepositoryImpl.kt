@@ -31,20 +31,19 @@ class PostRepositoryImpl : PostRepository {
         posts = posts.map { post ->
             if (post.id == id) {
                 post.copy(
-
                     likes = if (post.likedByMe) {
-                        post.likes--
+                        post.likes - 1
                     } else {
-                        post.likes++
+                        post.likes + 1
                     },
                     likedByMe = !post.likedByMe,
-
-                    )
+                )
 
             } else {
                 post
             }
         }
+        data.value = posts
 
     }
 
@@ -77,12 +76,13 @@ class PostRepositoryImpl : PostRepository {
         posts = posts.map { post ->
             if (post.id == id) {
                 post.copy(
-                    shares = post.shares++
+                    shares = post.shares + 1
                 )
             } else {
                 post
             }
         }
+        data.value = posts
     }
 
     private fun findElementById(id: Long): Post? {

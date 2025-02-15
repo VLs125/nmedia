@@ -13,7 +13,6 @@ import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         val binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         postViewModel.data.observe(this) { posts ->
             adapter.posts = posts
-
         }
     }
 
