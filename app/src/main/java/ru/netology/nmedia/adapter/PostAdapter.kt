@@ -1,6 +1,5 @@
 package ru.netology.nmedia.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -12,12 +11,6 @@ class PostAdapter(
     private val onShareClickListener: OnShareClicked
 ) :
     ListAdapter<Post, PostViewHolder>(PostDiffCallback()) {
-    var posts = emptyList<Post>()
-        @SuppressLint("NotifyDataSetChanged")
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
