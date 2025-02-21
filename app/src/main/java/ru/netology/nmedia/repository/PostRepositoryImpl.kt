@@ -8,7 +8,7 @@ class PostRepositoryImpl : PostRepository {
     private var posts = List(10) {
         Post(
             id = it + 1L,
-            likes = 100_00,
+            likes = 10100,
             shares = 100,
             author = " $it Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! " +
