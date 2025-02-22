@@ -20,7 +20,10 @@ class MainActivity : AppCompatActivity() {
         applyInset(binding.main)
         val postViewModel: PostViewModel by viewModels()
         val adapter =
-            PostAdapter({ postViewModel.like(it.id) }, { postViewModel.increaseShare(it.id) })
+            PostAdapter(
+                { postViewModel.like(it.id) },
+                { postViewModel.increaseShare(it.id) },
+                { postViewModel.removePost(it.id) })
         binding.main.adapter = adapter
 
         postViewModel.data.observe(this) { posts ->

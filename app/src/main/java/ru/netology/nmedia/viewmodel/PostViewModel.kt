@@ -12,4 +12,5 @@ class PostViewModel : ViewModel() {
     fun shareCount(id: Long) = repo.getShareCount(id)
     fun increaseShare(id: Long) = repo.increaseShareCount(id)
     fun likeCount(id: Long) = repo.getLikeCount(id)
+    fun removePost(id: Long) = repo.removeById(id)
 }

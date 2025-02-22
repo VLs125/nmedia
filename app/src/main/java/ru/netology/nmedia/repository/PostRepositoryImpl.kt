@@ -85,6 +85,12 @@ class PostRepositoryImpl : PostRepository {
         data.value = posts
     }
 
+    override fun removeById(id: Long) {
+        posts = posts.filter { it.id != id }
+        data.value = posts
+
+    }
+
     private fun findElementById(id: Long): Post? {
         return try {
             data.value?.first() { it.id == id }
