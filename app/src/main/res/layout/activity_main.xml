@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,8 +8,27 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/postText"
         tools:context=".view.MainActivity" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/postText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/post_text"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@android:color/transparent">
+    </EditText>
+    <ImageButton
+        android:layout_width="@dimen/common_spacing"
+        android:layout_height="@dimen/common_spacing"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_add_button_foreground"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
