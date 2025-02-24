@@ -5,5 +5,7 @@
     <string name="description_post_menu">Post menu</string>
     <string name="menu_remove">Remove</string>
     <string name="post_text">Post text</string>
+    <string name="empty_text_error">Not empty text!</string>
+
 
 </resources>

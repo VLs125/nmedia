@@ -11,5 +11,5 @@ interface PostRepository {
     fun getShareCount(id: Long): Int
     fun increaseShareCount(id: Long)
     fun removeById(id: Long)
-
+    fun save(post: Post)
 }
