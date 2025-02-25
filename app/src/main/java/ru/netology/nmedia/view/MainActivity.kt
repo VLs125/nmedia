@@ -1,5 +1,6 @@
 package ru.netology.nmedia.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -32,8 +33,8 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
         binding.addPostButton.setOnClickListener {
-            val text = binding.postText.text.toString()
-            if (text.isNullOrBlank()) {
+            val text = binding.postText.text.toString().trim()
+            if (text.isBlank() || text.isEmpty()) {
                 Toast.makeText(
                     this,
                     R.string.empty_text_error,
@@ -44,25 +45,30 @@ class MainActivity : AppCompatActivity() {
             }
             postViewModel.savePost(text)
             binding.postText.clearFocus()
-            if (binding.postText.requestFocus()) {
-                val imm = getSystemService(InputMethodManager::class.java)
-                imm.showSoftInput(binding.postText, InputMethodManager.SHOW_IMPLICIT)
-            }
+            hideKeyboard(it)
         }
     }
 
-    private fun applyInset(main: View) {
-        ViewCompat.setOnApplyWindowInsetsListener(main) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(
-                v.paddingLeft + systemBars.left,
-                v.paddingTop + systemBars.top,
-                v.paddingRight + systemBars.right,
-                v.paddingBottom + systemBars.bottom
-            )
-            insets
-        }
+private fun applyInset(main: View) {
+    ViewCompat.setOnApplyWindowInsetsListener(main) { v, insets ->
+        val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+        // Для клавиатуры:
+        val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+        val isImeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+        v.setPadding(
+            v.paddingLeft,
+            systemBars.top,
+            v.paddingRight,
+            if (isImeVisible) imeInsets.bottom else systemBars.bottom
+        )
+        insets
+    }
+}
 
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager =
+            view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }
