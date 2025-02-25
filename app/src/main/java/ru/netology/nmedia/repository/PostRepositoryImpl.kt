@@ -95,11 +95,22 @@ class PostRepositoryImpl : PostRepository {
     }
 
     override fun save(post: Post) {
-        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
-        val currentDate = sdf.format(Date())
-        val changedPosts =
-            arrayListOf(post.copy(id++, publshed = currentDate, author = "Me")) + posts
-        data.value = changedPosts
+        if (post.id == 0L) {
+            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val currentDate = sdf.format(Date())
+            posts =
+                arrayListOf(post.copy(id++, publshed = currentDate, author = "Me")) + posts
+        } else {
+            posts.map { post ->
+                if (post.id == id) {
+                    post.copy(
+                        content = post.content
+                    )
+                }
+
+                data.value = posts
+            }
+        }
     }
 
     private fun findElementById(id: Long): Post? {
