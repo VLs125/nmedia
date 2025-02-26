@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 binding.postText.setText(editedPost.content)
                 binding.postText.requestFocus()
-                showKeyboard(binding.postText)
+                binding.postText.showKeyboard()
             }
         }
         binding.addPostButton.setOnClickListener {
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    fun EditText.showKeyboard(
+    private fun EditText.showKeyboard(
     ) {
         requestFocus()
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as

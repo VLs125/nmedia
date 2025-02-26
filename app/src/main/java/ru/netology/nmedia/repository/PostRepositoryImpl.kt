@@ -108,9 +108,10 @@ class PostRepositoryImpl : PostRepository {
                     )
                 }
 
-                data.value = posts
+
             }
         }
+        data.value = posts
     }
 
     private fun findElementById(id: Long): Post? {
