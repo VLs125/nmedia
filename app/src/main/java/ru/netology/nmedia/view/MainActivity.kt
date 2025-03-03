@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
             if (editedPost.id == 0L) {
                 return@observe
             } else {
+                binding.group.visibility = View.VISIBLE
                 binding.postText.setText(editedPost.content)
                 binding.postText.requestFocus()
                 binding.postText.showKeyboard()
@@ -72,10 +73,17 @@ class MainActivity : AppCompatActivity() {
                     .show()
                 return@setOnClickListener
             }
+            binding.group.visibility = View.GONE
             postViewModel.savePost(text)
             binding.postText.setText("")
             binding.postText.clearFocus()
             hideKeyboard(it)
+        }
+        binding.editCancelButton.setOnClickListener {
+            binding.postText.setText("")
+            binding.postText.clearFocus()
+            hideKeyboard(it)
+            binding.group.visibility = View.GONE
         }
     }
 
