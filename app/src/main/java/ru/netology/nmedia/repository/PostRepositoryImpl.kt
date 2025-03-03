@@ -99,7 +99,7 @@ class PostRepositoryImpl : PostRepository {
             val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
             val currentDate = sdf.format(Date())
             posts =
-                arrayListOf(post.copy(id++, publshed = currentDate, author = "Me")) + posts
+                arrayListOf(post.copy(++id, publshed = currentDate, author = "Me")) + posts
         } else {
             posts = posts.map {
                 if (it.id != post.id) {

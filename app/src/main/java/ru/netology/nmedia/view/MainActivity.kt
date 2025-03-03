@@ -11,13 +11,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.internal.ViewUtils.showKeyboard
 import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
+import ru.netology.nmedia.viewmodel.emptyPost
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        applyInset(binding.main)
+        applyInset(binding.root)
         val postViewModel: PostViewModel by viewModels()
         val adapter =
             PostAdapter(object : OnInteractionListener {
@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             hideKeyboard(it)
         }
         binding.editCancelButton.setOnClickListener {
+            postViewModel.onEdit(emptyPost)
             binding.postText.setText("")
             binding.postText.clearFocus()
             hideKeyboard(it)
