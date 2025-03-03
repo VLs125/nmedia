@@ -13,7 +13,6 @@
         app:layout_constraintBottom_toTopOf="@id/barrier3"
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/card_post" />
-        tools:context=".view.MainActivity" />
 
     <EditText
         android:id="@+id/postText"

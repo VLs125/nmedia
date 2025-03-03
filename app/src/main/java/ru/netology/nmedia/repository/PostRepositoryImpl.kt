@@ -10,7 +10,7 @@ class PostRepositoryImpl : PostRepository {
     private var id = 0L
     private var posts = List(10) {
         Post(
-            id = id++,
+            id = ++id,
             likes = 10100,
             shares = 100,
             author = " $id Нетология. Университет интернет-профессий будущего",
@@ -101,14 +101,14 @@ class PostRepositoryImpl : PostRepository {
             posts =
                 arrayListOf(post.copy(id++, publshed = currentDate, author = "Me")) + posts
         } else {
-            posts.map { post ->
-                if (post.id == id) {
-                    post.copy(
+            posts = posts.map {
+                if (it.id != post.id) {
+                    it
+                } else {
+                    it.copy(
                         content = post.content
                     )
                 }
-
-
             }
         }
         data.value = posts
