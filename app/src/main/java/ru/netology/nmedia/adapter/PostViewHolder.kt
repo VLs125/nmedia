@@ -17,9 +17,8 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.publshed
             content.text = post.content
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
-            )
+            like.isChecked = post.likedByMe
+
             likeCount.text = WordEndingService.getCountWord(post.likes)
             shareCount.text = WordEndingService.getCountWord(post.shares)
 
