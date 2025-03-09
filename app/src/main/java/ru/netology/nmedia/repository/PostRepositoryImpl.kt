@@ -3,14 +3,17 @@ package ru.netology.nmedia.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.dto.Post
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class PostRepositoryImpl : PostRepository {
+    private var id = 0L
     private var posts = List(10) {
         Post(
-            id = it + 1L,
+            id = ++id,
             likes = 10100,
             shares = 100,
-            author = " $it Нетология. Университет интернет-профессий будущего",
+            author = " $id Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! " +
                     "Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. " +
                     "Затем появились курсы по дизайну, разработке, аналитике и управлению. " +
@@ -80,6 +83,32 @@ class PostRepositoryImpl : PostRepository {
                 )
             } else {
                 post
+            }
+        }
+        data.value = posts
+    }
+
+    override fun removeById(id: Long) {
+        posts = posts.filter { it.id != id }
+        data.value = posts
+
+    }
+
+    override fun save(post: Post) {
+        if (post.id == 0L) {
+            val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+            val currentDate = sdf.format(Date())
+            posts =
+                arrayListOf(post.copy(++id, publshed = currentDate, author = "Me")) + posts
+        } else {
+            posts = posts.map {
+                if (it.id != post.id) {
+                    it
+                } else {
+                    it.copy(
+                        content = post.content
+                    )
+                }
             }
         }
         data.value = posts

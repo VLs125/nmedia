@@ -7,8 +7,9 @@ interface PostRepository {
     fun get(): LiveData<List<Post>>
     fun likeById(id: Long)
     fun isLiked(id: Long): Boolean
-    fun getLikeCount(id:Long): Int
-    fun getShareCount(id:Long): Int
-    fun increaseShareCount(id:Long)
-
+    fun getLikeCount(id: Long): Int
+    fun getShareCount(id: Long): Int
+    fun increaseShareCount(id: Long)
+    fun removeById(id: Long)
+    fun save(post: Post)
 }
