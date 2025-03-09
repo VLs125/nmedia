@@ -119,13 +119,16 @@
         app:layout_constraintTop_toBottomOf="@id/content"
         app:srcCompat="@android:drawable/ic_menu_view" />
 
-    <com.google.android.material.checkbox.MaterialCheckBox
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
+        app:iconTint="@style/App.Widget.LikeButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:checkable="true"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/ic_base_size"
         android:layout_marginTop="@dimen/common_spacing"
-        app:layout_constraintTop_toBottomOf="@id/content"
-        android:button="@drawable/like_selector" />
+        app:icon="@drawable/like_selector"
+        app:layout_constraintTop_toBottomOf="@id/content" />
 
     <TextView
         android:id="@+id/likeCount"
