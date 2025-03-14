@@ -121,7 +121,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
-        app:iconTint="@style/App.Widget.LikeButton"
+        app:iconTint="@style/Widget.AppTheme.LikeButton"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:checkable="true"
         android:layout_width="wrap_content"
