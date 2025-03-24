@@ -7,7 +7,7 @@
     <string name="menu_edit">Edit</string>
     <string name="post_text">Post text</string>
     <string name="empty_text_error">Not empty text!</string>
-
+    <string name="_10">10</string>
 
 
 </resources>

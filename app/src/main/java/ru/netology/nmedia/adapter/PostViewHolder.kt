@@ -1,5 +1,6 @@
 package ru.netology.nmedia.adapter
 
+import android.content.res.ColorStateList
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
@@ -17,11 +18,10 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.publshed
             content.text = post.content
-            like.setImageResource(
-                if (post.likedByMe) R.drawable.ic_liked_24 else R.drawable.ic_like_24
-            )
-            likeCount.text = WordEndingService.getCountWord(post.likes)
-            shareCount.text = WordEndingService.getCountWord(post.shares)
+            like.isChecked = post.likedByMe
+            like.text = WordEndingService.getCountWord(post.likes)
+            share.text = WordEndingService.getCountWord(post.shares)
+
 
             like.setOnClickListener { onIneractionListener.onLike(post) }
             share.setOnClickListener { onIneractionListener.onShare(post) }
