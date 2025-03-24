@@ -79,6 +79,7 @@
         android:id="@+id/iconBarrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="like,view,share" />
 
@@ -97,11 +98,11 @@
         android:id="@+id/share"
         style="@style/Widget.AppTheme.ShareButton"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/ic_base_size"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         app:icon="@android:drawable/ic_menu_share"
         app:layout_constraintStart_toEndOf="@id/like"
-        android:textColor="@color/black"
+        android:textColor="@color/color_like_selector"
         app:layout_constraintTop_toBottomOf="@id/content" />
 
     <ImageView
@@ -117,12 +118,12 @@
         android:id="@+id/like"
         style="@style/Widget.AppTheme.LikeButton"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/ic_base_size"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         android:checkable="true"
-        android:textColor="@color/black"
+        android:textColor="@color/color_like_selector"
         app:icon="@drawable/like_selector"
         app:layout_constraintEnd_toStartOf="@id/share"
-        app:layout_constraintTop_toBottomOf="@id/content" />
+        app:layout_constraintTop_toBottomOf="@id/content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
