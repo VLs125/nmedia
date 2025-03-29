@@ -1,6 +1,7 @@
 package ru.netology.nmedia.view
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -27,6 +28,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         applyInset(binding.root)
         val postViewModel: PostViewModel by viewModels()
+        val newPostLauncher = registerForActivityResult(NewPostContract) {
+            it ?: return@registerForActivityResult
+            postViewModel.savePost(it)
+        }
+
         val adapter =
             PostAdapter(object : OnInteractionListener {
                 override fun onLike(post: Post) {
@@ -38,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
+
                 override fun onEdit(post: Post) {
                     postViewModel.onEdit(post)
 
@@ -45,6 +52,14 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onShare(post: Post) {
                     postViewModel.increaseShare(post.id)
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, post.content)
+                    }
+                    val chooser = Intent.createChooser(intent, "Поделится постом")
+                    startActivity(chooser)
+
                 }
             })
         binding.main.adapter = adapter
@@ -63,21 +78,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.addPostButton.setOnClickListener {
-            val text = binding.postText.text.toString().trim()
-            if (text.isBlank() || text.isEmpty()) {
-                Toast.makeText(
-                    this,
-                    R.string.empty_text_error,
-                    Toast.LENGTH_LONG
-                )
-                    .show()
-                return@setOnClickListener
-            }
-            binding.group.visibility = View.GONE
-            postViewModel.savePost(text)
-            binding.postText.setText("")
-            binding.postText.clearFocus()
-            hideKeyboard(it)
+
         }
         binding.editCancelButton.setOnClickListener {
             postViewModel.onEdit(emptyPost)

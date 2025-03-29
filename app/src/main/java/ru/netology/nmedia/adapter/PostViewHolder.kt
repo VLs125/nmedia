@@ -1,6 +1,5 @@
 package ru.netology.nmedia.adapter
 
-import android.content.res.ColorStateList
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R

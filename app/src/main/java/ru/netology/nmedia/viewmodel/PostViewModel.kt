@@ -1,5 +1,7 @@
 package ru.netology.nmedia.viewmodel
 
+import android.content.Intent
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.dto.Post
@@ -21,10 +23,7 @@ class PostViewModel : ViewModel() {
     val edit = MutableLiveData(emptyPost)
     val data = repo.get()
     fun like(id: Long) = repo.likeById(id)
-    fun isLiked(id: Long) = repo.isLiked(id)
-    fun shareCount(id: Long) = repo.getShareCount(id)
     fun increaseShare(id: Long) = repo.increaseShareCount(id)
-    fun likeCount(id: Long) = repo.getLikeCount(id)
     fun removePost(id: Long) = repo.removeById(id)
     fun savePost(content: String) =
         run {
@@ -35,4 +34,6 @@ class PostViewModel : ViewModel() {
     fun onEdit(post: Post) {
         edit.value = post
     }
+
+
 }
