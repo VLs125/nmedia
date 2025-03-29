@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
-
                 override fun onEdit(post: Post) {
                     postViewModel.onEdit(post)
 
@@ -71,8 +70,7 @@ class MainActivity : AppCompatActivity() {
             if (editedPost.id == 0L) {
                 return@observe
             } else {
-                binding.group.visibility = View.VISIBLE
-                binding.postText.setText(editedPost.content)
+                binding.add.setText(editedPost.content)
                 binding.postText.requestFocus()
                 binding.postText.showKeyboard()
             }
