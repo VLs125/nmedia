@@ -1,5 +1,7 @@
 package ru.netology.nmedia.adapter
 
+import android.annotation.SuppressLint
+import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.R
@@ -20,9 +22,18 @@ class PostViewHolder(
             like.isChecked = post.likedByMe
             like.text = WordEndingService.getCountWord(post.likes)
             share.text = WordEndingService.getCountWord(post.shares)
+            videoLink.text = post.video
 
+            if (!videoLink.text.isNullOrEmpty()) {
+                groupForVideo.visibility = View.VISIBLE
+            } else {
+                groupForVideo.visibility = View.GONE
+            }
 
             like.setOnClickListener { onIneractionListener.onLike(post) }
+            playVideo.setOnClickListener {
+                onIneractionListener.onVideoPlay(post.video)
+            }
             share.setOnClickListener { onIneractionListener.onShare(post) }
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {

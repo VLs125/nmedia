@@ -1,24 +1,19 @@
 package ru.netology.nmedia.view
 
-import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import ru.netology.nmedia.R
 import ru.netology.nmedia.adapter.OnInteractionListener
 import ru.netology.nmedia.adapter.PostAdapter
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.viewmodel.PostViewModel
-import ru.netology.nmedia.viewmodel.emptyPost
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +44,7 @@ class MainActivity : AppCompatActivity() {
 
                 }
 
+
                 override fun onShare(post: Post) {
                     postViewModel.increaseShare(post.id)
                     val intent = Intent().apply {
@@ -58,32 +54,30 @@ class MainActivity : AppCompatActivity() {
                     }
                     val chooser = Intent.createChooser(intent, "Поделится постом")
                     startActivity(chooser)
+                }
 
+                override fun onVideoPlay(videoUrl: String?) {
+                    videoUrl ?: return
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+                    startActivity(intent)
                 }
             })
         binding.main.adapter = adapter
         postViewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
+        binding.add.setOnClickListener {
+            newPostLauncher.launch("")
+        }
 
         postViewModel.edit.observe(this) { editedPost ->
             if (editedPost.id == 0L) {
                 return@observe
             } else {
-                binding.add.setText(editedPost.content)
-                binding.postText.requestFocus()
-                binding.postText.showKeyboard()
+                val intent = Intent(this, NewPostActivity::class.java)
+                intent.putExtra("content", editedPost.content)
+                startActivity(intent)
             }
-        }
-        binding.addPostButton.setOnClickListener {
-
-        }
-        binding.editCancelButton.setOnClickListener {
-            postViewModel.onEdit(emptyPost)
-            binding.postText.setText("")
-            binding.postText.clearFocus()
-            hideKeyboard(it)
-            binding.group.visibility = View.GONE
         }
     }
 
@@ -102,19 +96,4 @@ class MainActivity : AppCompatActivity() {
             insets
         }
     }
-
-    private fun hideKeyboard(view: View) {
-        val inputMethodManager =
-            view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-
-    private fun EditText.showKeyboard(
-    ) {
-        requestFocus()
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as
-                InputMethodManager
-        imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
-    }
-
 }

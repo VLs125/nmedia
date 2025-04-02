@@ -1,7 +1,5 @@
 package ru.netology.nmedia.viewmodel
 
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.dto.Post
@@ -15,8 +13,8 @@ var emptyPost = Post(
     author = "",
     publshed = "",
     content = "",
-    likedByMe = false
-)
+    likedByMe = false,
+    )
 
 class PostViewModel : ViewModel() {
     private val repo: PostRepository = PostRepositoryImpl()
