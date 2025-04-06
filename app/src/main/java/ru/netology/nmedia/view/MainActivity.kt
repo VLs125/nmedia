@@ -74,9 +74,10 @@ class MainActivity : AppCompatActivity() {
             if (editedPost.id == 0L) {
                 return@observe
             } else {
-                val intent = Intent(this, NewPostActivity::class.java)
-                intent.putExtra("content", editedPost.content)
-                startActivity(intent)
+                newPostLauncher.launch(editedPost.content)
+//                val intent = Intent(this, NewPostActivity::class.java)
+//                intent.putExtra("content", editedPost.content)
+//                startActivity(intent)
             }
         }
     }

@@ -24,12 +24,12 @@
         app:constraint_referenced_ids="video_link, play_video" />
 
     <TextView
-        app:layout_constraintTop_toBottomOf="@id/iconBarrier"
+        app:layout_constraintTop_toBottomOf="@id/content"
         android:background="@drawable/ic_launcher_background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:id="@+id/video_link"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
@@ -40,10 +40,10 @@
         android:id="@+id/play_video"
         app:layout_constraintStart_toStartOf="@id/video_link"
         app:layout_constraintTop_toTopOf="@id/video_link"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/video_link"
+        app:layout_constraintBottom_toBottomOf="@+id/video_link"
         android:layout_centerInParent="true"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checkable="false"
         app:icon="@drawable/baseline_play_circle_24"
@@ -143,7 +143,7 @@
         app:icon="@android:drawable/ic_menu_share"
         app:layout_constraintStart_toEndOf="@id/like"
         android:textColor="@color/color_like_selector"
-        app:layout_constraintTop_toBottomOf="@id/content" />
+        app:layout_constraintTop_toBottomOf="@id/video_link" />
 
     <ImageView
         android:id="@+id/view"
@@ -151,7 +151,7 @@
         android:layout_height="@dimen/ic_base_size"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintRight_toLeftOf="@id/viewCount"
-        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintTop_toBottomOf="@id/video_link"
         app:srcCompat="@android:drawable/ic_menu_view" />
 
     <com.google.android.material.button.MaterialButton
@@ -163,6 +163,6 @@
         android:checkable="true"
         app:icon="@drawable/like_selector"
         app:layout_constraintEnd_toStartOf="@id/share"
-        app:layout_constraintTop_toBottomOf="@id/content"/>
+        app:layout_constraintTop_toBottomOf="@id/video_link"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
